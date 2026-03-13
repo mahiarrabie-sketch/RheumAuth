@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RheumAuth</title>
+  <meta name="description" content="RheumAuth helps rheumatology clinics handle prior auths, denials, renewals, and peer-to-peer preparation faster." />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e2e8f0;
+      --accent: #0f172a;
+      --accent-soft: #e2e8f0;
+      --pill: #e0f2fe;
+      --pill-text: #075985;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(248, 250, 252, 0.95);
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 88px 0 56px;
+    }
+
+    .pill {
+      display: inline-block;
+      background: var(--pill);
+      color: var(--pill-text);
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 58px;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      max-width: 850px;
+    }
+
+    .subtext {
+      font-size: 21px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 820px;
+      margin-top: 22px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 20px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--border);
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .button-secondary {
+      background: white;
+      color: var(--text);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .stat-card, .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+    }
+
+    .section {
+      padding: 26px 0 10px;
+    }
+
+    .section-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .section h2 {
+      font-size: 40px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin: 0;
+      max-width: 850px;
+    }
+
+    .section p {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 840px;
+      margin-top: 14px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 21px;
+      letter-spacing: -0.02em;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .card ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    .pricing {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .price-tag {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 12px 0 16px;
+    }
+
+    .cta {
+      margin: 64px 0 90px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 34px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .cta h3 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      letter-spacing: -0.03em;
+    }
+
+    .cta p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0 44px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      h1 { font-size: 46px; }
+      .grid-4, .pricing { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stats, .grid-3 { grid-template-columns: 1fr; }
+      .cta { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 640px) {
+      .nav { height: auto; padding: 18px 0; flex-direction: column; align-items: flex-start; }
+      .nav-links { flex-wrap: wrap; gap: 14px; }
+      .hero { padding-top: 56px; }
+      h1 { font-size: 36px; }
+      .subtext { font-size: 18px; }
+      .grid-4, .pricing { grid-template-columns: 1fr; }
+      .section h2 { font-size: 31px; }
+      .cta h3 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">RheumAuth</div>
+      <div class="nav-links">
+        <a href="#product">Product</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="mailto:hello@rheumauth.com">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="pill">Rheumatology prior auth platform</div>
+        <h1>Rheumatology prior auths, denials, and renewals handled in minutes.</h1>
+        <div class="subtext">
+          RheumAuth helps clinics move faster on specialty medication access by organizing payer requirements,
+          surfacing missing documentation, and generating cleaner prior auth and appeal language.
+        </div>
+        <div class="button-row">
+          <a class="button button-primary" href="mailto:hello@rheumauth.com?subject=RheumAuth%20Demo">Request Demo</a>
+          <a class="button button-secondary" href="#product">See Product</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-label">Core workflows</div>
+            <div class="stat-value">3</div>
+            <div class="stat-label">New auths, denials, renewals</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Primary focus</div>
+            <div class="stat-value">Rheum</div>
+            <div class="stat-label">Built for biologics and specialty meds</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Product promise</div>
+            <div class="stat-value">Faster</div>
+            <div class="stat-label">Payer-aware outputs with missing-info checks</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="product">
+      <div class="container">
+        <div class="section-eyebrow">Why RheumAuth</div>
+        <h2>Built for the real medication-access problems rheumatology clinics face.</h2>
+        <p>
+          The hardest part is not just writing a letter. It is knowing what the payer wants,
+          what is missing from the note, and what to do when the first submission fails.
+        </p>
+
+        <div class="grid-4">
+          <div class="card">
+            <h3>New prior auths</h3>
+            <p>Turn clinic notes into payer-aware authorization drafts with clear missing-info detection before submission.</p>
+          </div>
+          <div class="card">
+            <h3>Denial analysis</h3>
+            <p>Classify denial language so staff know whether to appeal, resubmit, switch, or escalate.</p>
+          </div>
+          <div class="card">
+            <h3>Renewals</h3>
+            <p>Generate continuation summaries that show benefit, flare prevention, and interruption risk.</p>
+          </div>
+          <div class="card">
+            <h3>Peer-to-peer prep</h3>
+            <p>Give physicians a concise case summary and sharper approval talking points before insurer calls.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="section-eyebrow">How it works</div>
+        <h2>A simple workflow your staff can use in minutes.</h2>
+        <p>Keep the experience fast, quiet, and clinically grounded.</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <h3>1. Select the case context</h3>
+            <p>Choose diagnosis, drug, payer, plan, and route so the system knows the likely coverage pathway.</p>
+          </div>
+          <div class="card">
+            <h3>2. Paste the note or denial</h3>
+            <p>The engine extracts treatment failures, screening, disease activity, and contraindications.</p>
+          </div>
+          <div class="card">
+            <h3>3. Generate the best next step</h3>
+            <p>Create a prior auth, appeal, peer-to-peer sheet, or renewal summary with visible missing-info warnings.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-eyebrow">Pricing</div>
+        <h2>Simple pricing for clinics.</h2>
+        <p>Start with small and medium rheumatology practices first, then expand from there.</p>
+
+        <div class="pricing">
+          <div class="card">
+            <h3>Starter</h3>
+            <div class="price-tag">Custom</div>
+            <ul>
+              <li>For solo or very small practices</li>
+              <li>Core auth and denial generation</li>
+              <li>Simple onboarding</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Growth</h3>
+            <div class="price-tag">Custom</div>
+            <ul>
+              <li>For busy rheumatology clinics</li>
+              <li>Renewals and peer-to-peer prep</li>
+              <li>Priority support</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Enterprise</h3>
+            <div class="price-tag">Custom</div>
+            <ul>
+              <li>For multi-site groups</li>
+              <li>Custom onboarding</li>
+              <li>Analytics and advanced workflow later</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="cta">
+        <div>
+          <h3>Ready to launch RheumAuth?</h3>
+          <p>
+            This is a simple first version of your site. Once it is live, you can keep improving the design,
+            add a real app, and connect forms or login later.
+          </p>
+        </div>
+        <div class="button-row" style="margin-top:0;">
+          <a class="button button-primary" href="mailto:hello@rheumauth.com?subject=RheumAuth%20Launch">Get Started</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 RheumAuth. Built for rheumatology medication access.</div>
+  </footer>
+</body>
+</html>
