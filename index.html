@@ -7,168 +7,613 @@
   <style>
     :root{
       --bg:#f4f8fc;
-      --surface:#ffffff;
-      --surface-2:#eef5fb;
-      --text:#10233f;
-      --muted:#55657c;
+      --card:#ffffff;
+      --card2:#eef5fb;
       --line:#d9e5f0;
-      --primary:#13325b;
-      --primary-2:#1d4f8c;
-      --accent:#dcecff;
-      --accent-text:#245b96;
-      --success:#2f7d57;
-      --warning:#a56a16;
-      --shadow:0 10px 30px rgba(16,35,63,0.06);
-      --max:1180px;
+      --text:#10233f;
+      --muted:#5b6b80;
+      --navy:#13325b;
+      --navy2:#102949;
+      --blue:#245b96;
+      --bluebg:#dcecff;
+      --green:#2f7d57;
+      --greenbg:#e9f7ef;
+      --amber:#9a6518;
+      --amberbg:#fff7e8;
+      --rose:#a83b4f;
+      --rosebg:#fff0f3;
+      --shadow:0 10px 30px rgba(16,35,63,.06);
+      --radius:26px;
+      --max:1240px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
     a{text-decoration:none;color:inherit}
+    button,input,select,textarea{font:inherit}
     .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-    .topbar{position:sticky;top:0;z-index:20;background:rgba(244,248,252,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-    .nav{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:14px;font-weight:700;font-size:20px}
-    .logo{width:44px;height:44px;border-radius:16px;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:var(--shadow)}
-    .navlinks{display:flex;gap:28px;align-items:center;color:var(--muted);font-size:17px}
-    .navlinks a:hover{color:var(--text)}
-    .hero{padding:52px 0 34px}
-    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:34px;align-items:center}
-    .badge{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--accent-text);border:1px solid #c7def7;border-radius:999px;padding:10px 16px;font-size:14px;font-weight:700}
-    h1{font-size:66px;line-height:1.03;letter-spacing:-0.04em;margin:18px 0 18px}
-    .lead{font-size:25px;line-height:1.65;color:var(--muted);max-width:760px;margin:0}
-    .btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
-    .btn{min-height:56px;padding:0 24px;border-radius:18px;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;font-size:19px;font-weight:700;cursor:pointer}
-    .btn-primary{background:var(--primary);color:white}.btn-primary:hover{background:#0f2a4d}
-    .btn-secondary{background:white;color:var(--text);border-color:var(--line)}.btn-secondary:hover{background:#f8fbff}
-    .trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:20px;color:var(--muted);font-size:17px}.trust span{display:flex;align-items:center;gap:8px}
-    .check{width:20px;height:20px;border-radius:50%;background:#e8f6ee;color:var(--success);display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
-    .cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
-    .card{background:var(--surface);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow)}
-    .card-pad{padding:26px}.mini-label{font-size:15px;color:var(--muted);margin-bottom:8px}.mini-title{font-size:24px;font-weight:800;margin-bottom:8px}.mini-copy{font-size:17px;line-height:1.6;color:var(--muted)}
-    .preview{overflow:hidden}.preview-top{border-bottom:1px solid var(--line);background:linear-gradient(180deg,#f7fbff,#eef5fb);padding:24px}.preview-top h3{margin:0 0 8px;font-size:32px}.preview-top p{margin:0;font-size:18px;color:var(--muted);line-height:1.7}.preview-body{padding:24px}
-    .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.pill{background:#f2f7fc;border:1px solid var(--line);border-radius:999px;padding:9px 14px;font-size:14px;color:var(--text);font-weight:700}
-    .boxed{border:1px solid var(--line);border-radius:24px;padding:20px;background:white;margin-bottom:14px}.boxed.warn{background:#fff9ef}.boxed.dark{background:var(--primary);color:white;border-color:var(--primary)}.boxed h4{margin:0 0 12px;font-size:22px}.boxed ul{padding-left:0;margin:0;list-style:none}.boxed li{display:flex;gap:10px;align-items:flex-start;font-size:17px;line-height:1.6;color:inherit;margin:10px 0}
-    .dot-ok,.dot-warn{width:22px;height:22px;border-radius:50%;flex:0 0 auto;margin-top:2px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}.dot-ok{background:#e8f6ee;color:var(--success)}.dot-warn{background:#fff0cf;color:var(--warning)}
-    section.block{padding:36px 0}.eyebrow{color:var(--muted);font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
-    h2{font-size:52px;line-height:1.08;letter-spacing:-0.03em;margin:0 0 14px}.section-copy{max-width:900px;color:var(--muted);font-size:23px;line-height:1.75;margin:0}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:26px}
-    .icon{width:50px;height:50px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:var(--surface-2);color:var(--primary);font-size:22px;font-weight:800;border:1px solid var(--line)}
-    .step{width:50px;height:50px;border-radius:18px;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;margin-bottom:14px}
-    .trust-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-    .cta{background:var(--primary);color:white;border-radius:34px;padding:38px;box-shadow:var(--shadow)}.cta h3{font-size:46px;line-height:1.08;margin:0 0 14px;letter-spacing:-0.03em}.cta p{font-size:22px;line-height:1.75;color:#d8e4f3;margin:0}.cta-row{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .topbar{position:sticky;top:0;z-index:10;background:rgba(244,248,252,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+    .nav{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;gap:14px;align-items:center;font-weight:700}
+    .logo{width:44px;height:44px;border-radius:16px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:var(--shadow)}
+    .brand small{display:block;color:var(--muted);font-weight:500;font-size:13px;margin-top:2px}
+    .navlinks{display:flex;gap:26px;align-items:center;color:var(--muted);font-size:17px}
+    .navlinks button{background:none;border:none;cursor:pointer;color:inherit}
+    .nav-cta{display:flex;gap:12px}
+    .btn{border:none;border-radius:18px;min-height:50px;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;cursor:pointer}
+    .btn.primary{background:var(--navy);color:#fff}
+    .btn.primary:hover{background:var(--navy2)}
+    .btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}
+    .page{display:none}
+    .page.active{display:block}
+    .hero{padding:52px 0 30px}
+    .hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:28px;align-items:center}
+    .badge{display:inline-block;background:var(--bluebg);color:var(--blue);border:1px solid #c6ddf6;padding:10px 16px;border-radius:999px;font-size:14px;font-weight:700}
+    h1{font-size:62px;line-height:1.04;letter-spacing:-.04em;margin:18px 0}
+    h2{font-size:46px;line-height:1.08;letter-spacing:-.03em;margin:0 0 12px}
+    h3{margin:0}
+    .lead{font-size:24px;line-height:1.65;color:var(--muted);max-width:760px}
+    .section{padding:34px 0}
+    .eyebrow{font-size:14px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:800;margin-bottom:12px}
+    .section-copy{font-size:22px;line-height:1.75;color:var(--muted);max-width:920px}
+    .grid-3,.grid-4,.grid-2{display:grid;gap:18px}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-4{grid-template-columns:repeat(4,1fr)}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card.pad{padding:24px}
+    .preview-top{padding:22px 24px;background:var(--card2);border-bottom:1px solid var(--line)}
+    .preview-body{padding:24px}
+    .mini-label{font-size:14px;color:var(--muted);margin-bottom:6px}
+    .mini-title{font-size:24px;font-weight:800;margin-bottom:8px}
+    .mini-copy{font-size:17px;line-height:1.6;color:var(--muted)}
+    .pill{display:inline-block;padding:8px 12px;border-radius:999px;background:#f5f9fd;border:1px solid var(--line);font-size:14px;font-weight:700;margin:0 8px 8px 0}
+    .boxed{border:1px solid var(--line);border-radius:22px;padding:18px;background:#fff;margin-bottom:14px}
+    .boxed.warn{background:var(--amberbg)}
+    .boxed.dark{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .boxed h4{margin:0 0 10px;font-size:22px}
+    .boxed ul{list-style:none;padding:0;margin:0}
+    .boxed li{margin:10px 0;font-size:17px;line-height:1.6}
+    .trust-row{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:17px;margin-top:18px}
+    .check{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--greenbg);color:var(--green);font-size:13px;font-weight:800;margin-right:8px}
+    .cta{background:var(--navy);color:#fff;padding:36px;border-radius:32px;box-shadow:var(--shadow)}
+    .cta p{font-size:21px;line-height:1.7;color:#d5e2f1}
+    .cta-row{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+    .product-shell{padding:24px 0 36px}
+    .product-grid{display:grid;grid-template-columns:280px 1fr;gap:22px}
+    .sidebar .title{font-size:22px;font-weight:800}
+    .muted{color:var(--muted)}
+    .subtle{background:#f8fbff}
+    .statusline{border:1px solid var(--line);border-radius:18px;padding:12px 14px;background:#f8fbff;color:var(--muted);font-size:14px}
+    .sidebtn{width:100%;display:flex;align-items:center;gap:12px;text-align:left;border-radius:18px;padding:13px 14px;font-size:17px;margin-bottom:10px;cursor:pointer;border:1px solid var(--line);background:#fff;color:#334}
+    .sidebtn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .main h2{font-size:34px}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .metric{padding:18px;border-radius:20px;border:1px solid var(--line);background:#f8fbff}
+    .metric .value{font-size:34px;font-weight:800;margin-top:4px}
+    .workspace{display:grid;grid-template-columns:1.04fr .96fr;gap:22px}
+    .fieldgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    label{display:block;font-size:16px;font-weight:700;color:#223;margin-bottom:8px}
+    input,select,textarea{width:100%;border:1px solid var(--line);border-radius:18px;background:#fff;padding:13px 14px;font-size:17px;color:var(--text)}
+    textarea{min-height:190px;resize:vertical}
+    .playbook{border:1px solid var(--line);background:#f8fbff;border-radius:22px;padding:18px}
+    .box-title{font-size:18px;font-weight:800;margin-bottom:8px}
+    .signal{border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:14px}
+    .signal.green{background:var(--greenbg);border-color:#c7e9d7;color:#1f6844}
+    .signal.yellow{background:var(--amberbg);border-color:#f1ddb1;color:var(--amber)}
+    .signal.red{background:var(--rosebg);border-color:#f1c6d0;color:var(--rose)}
+    .signal h4{margin:0 0 10px;font-size:20px}
+    .signal div{font-size:16px;line-height:1.7;margin:6px 0}
+    .tag{display:inline-flex;padding:10px 14px;border-radius:999px;font-weight:800;font-size:14px;border:1px solid}
+    .tag.green{background:var(--greenbg);color:var(--green);border-color:#c7e9d7}
+    .tag.yellow{background:var(--amberbg);color:var(--amber);border-color:#f1ddb1}
+    .tag.red{background:var(--rosebg);color:var(--rose);border-color:#f1c6d0}
+    .rec{border:1px solid var(--line);background:#f8fbff;border-radius:18px;padding:14px;margin-bottom:10px}
+    .rec b{display:block;margin-bottom:4px;color:var(--text)}
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;background:#eef5fb;padding:8px;border-radius:18px}
+    .tabbtn{border:none;background:transparent;padding:12px 16px;border-radius:14px;cursor:pointer;font-size:16px;font-weight:700;color:#355}
+    .tabbtn.active{background:#fff;box-shadow:var(--shadow);color:var(--text)}
+    .tabpanel{margin-top:16px}
+    .output{border:1px solid var(--line);background:#f8fbff;border-radius:24px;padding:20px;white-space:pre-wrap;font-size:16px;line-height:1.8;color:#334}
+    .table-row{display:grid;grid-template-columns:120px 1fr 180px 120px 90px;gap:12px;align-items:center;padding:16px;border:1px solid var(--line);border-radius:20px;background:#f8fbff;margin-bottom:12px}
+    .badge-status{display:inline-flex;padding:10px 14px;border-radius:999px;border:1px solid;font-size:14px;font-weight:800}
+    .hidden{display:none}
     .footer{padding:26px 0 44px;color:var(--muted);font-size:15px}
-    @media (max-width:1100px){.hero-grid{grid-template-columns:1fr}h1{font-size:56px}.cards-3,.grid-3,.grid-4,.trust-grid{grid-template-columns:1fr 1fr}}
-    @media (max-width:760px){.nav{min-height:72px}.navlinks{display:none}h1{font-size:42px}h2{font-size:36px}.lead,.section-copy,.cta p{font-size:19px}.cards-3,.grid-3,.grid-4,.trust-grid{grid-template-columns:1fr}.cta h3{font-size:34px}.btn{width:100%}}
+    @media (max-width:1150px){
+      .hero-grid,.workspace,.product-grid{grid-template-columns:1fr}
+      .grid-4{grid-template-columns:repeat(2,1fr)}
+      h1{font-size:52px}
+      .table-row{grid-template-columns:1fr}
+    }
+    @media (max-width:760px){
+      .navlinks,.nav-cta{display:none}
+      h1{font-size:40px}
+      h2{font-size:34px}
+      .lead,.section-copy,.cta p{font-size:18px}
+      .grid-3,.grid-4,.grid-2,.metrics,.fieldgrid{grid-template-columns:1fr}
+      .btn{width:100%}
+    }
   </style>
 </head>
 <body>
   <div class="topbar">
     <div class="wrap nav">
-      <div class="brand"><div class="logo">R</div><div><div>RheumAuth</div></div></div>
+      <div class="brand">
+        <div class="logo">R</div>
+        <div>
+          <div>RheumAuth</div>
+          <small>Rheumatology medication-access platform</small>
+        </div>
+      </div>
       <div class="navlinks">
-        <a href="#features">Product</a>
-        <a href="#how">How It Works</a>
-        <a href="#pricing">Pricing</a>
-        <a href="mailto:hello@rheumauth.com">Contact</a>
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('product')">Product</button>
+        <button onclick="showPage('pricing')">Pricing</button>
+      </div>
+      <div class="nav-cta">
+        <button class="btn secondary" onclick="showPage('product')">View Product</button>
+        <button class="btn primary" onclick="showPage('product')">Open Demo</button>
       </div>
     </div>
   </div>
 
-  <main>
+  <div id="home" class="page active">
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <div class="badge">Built for rheumatology clinics and medication access teams</div>
-          <h1>Prior auths made simpler for rheumatology clinics.</h1>
-          <p class="lead">RheumAuth helps your team prepare prior auths, denial appeals, renewal summaries, and peer-to-peer prep in a clearer, faster way.</p>
-          <div class="btns">
-            <a class="btn btn-primary" href="mailto:hello@rheumauth.com?subject=RheumAuth Demo Request">Request a Demo</a>
-            <a class="btn btn-secondary" href="#how">See How It Works</a>
+          <div class="badge">Coverage intelligence first. Generation second.</div>
+          <h1>Help rheumatology clinics get the right drug approved faster.</h1>
+          <div class="lead">RheumAuth is a rheumatology medication-access operating system built to guide prior auths, denials, renewals, and peer-to-peer prep with a simple, clinic-friendly workflow.</div>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:28px">
+            <button class="btn primary" onclick="showPage('product')">Open Product Demo</button>
+            <button class="btn secondary" onclick="showPage('pricing')">View Pricing</button>
           </div>
-          <div class="trust">
-            <span><span class="check">✓</span>Large, easy-to-read text</span>
-            <span><span class="check">✓</span>Clear buttons and clean layouts</span>
-            <span><span class="check">✓</span>Simple steps for busy staff</span>
-          </div>
-          <div class="cards-3">
-            <div class="card"><div class="card-pad"><div class="mini-label">Less back-and-forth</div><div class="mini-title">Fewer delays</div><div class="mini-copy">Organize the clinical details payers usually want before submission.</div></div></div>
-            <div class="card"><div class="card-pad"><div class="mini-label">Faster staff workflow</div><div class="mini-title">Cleaner workflow</div><div class="mini-copy">Turn clinic notes into cleaner prior auth language in just a few steps.</div></div></div>
-            <div class="card"><div class="card-pad"><div class="mini-label">Clearer next steps</div><div class="mini-title">Easy review</div><div class="mini-copy">See what is documented, what is missing, and what needs review.</div></div></div>
+          <div class="grid-3" style="margin-top:30px">
+            <div class="card pad"><div class="mini-label">MVP focus</div><div class="mini-title">Auths + Appeals</div><div class="mini-copy">Also renewal support and peer-to-peer prep</div></div>
+            <div class="card pad"><div class="mini-label">Primary user</div><div class="mini-title">Clinic Staff</div><div class="mini-copy">Built for older physicians and older staff too</div></div>
+            <div class="card pad"><div class="mini-label">North star</div><div class="mini-title">Fast Path</div><div class="mini-copy">Get the fastest realistic path to approval</div></div>
           </div>
         </div>
-        <div class="card preview">
-          <div class="preview-top"><h3>What staff see</h3><p>A clear screen that shows what was found, what is missing, and the next best action.</p></div>
+        <div class="card">
+          <div class="preview-top">
+            <h3 style="font-size:30px">What makes RheumAuth different</h3>
+            <div class="mini-copy">It does not just draft letters. It guides the next best medication-access action.</div>
+          </div>
           <div class="preview-body">
-            <div class="pill-row"><div class="pill">Rheumatoid Arthritis</div><div class="pill">Adalimumab</div><div class="pill">Aetna</div></div>
-            <div class="boxed"><h4>Found in note</h4><ul><li><span class="dot-ok">✓</span> Methotrexate failure documented</li><li><span class="dot-ok">✓</span> Active synovitis documented</li><li><span class="dot-ok">✓</span> TB screening documented</li></ul></div>
-            <div class="boxed warn"><h4>Needs review</h4><ul><li><span class="dot-warn">!</span> HBV screening not found</li><li><span class="dot-warn">!</span> Preferred product trial not found</li></ul></div>
-            <div class="boxed dark"><h4>Suggested next step</h4><div style="font-size:17px;line-height:1.7;color:#e0e9f5">Generate an initial prior auth packet and flag likely step-therapy risk before submission.</div></div>
+            <div class="boxed"><h4>Coverage intelligence</h4><div class="mini-copy">Surface payer requirements, benefit pathway, common denial traps, and specialty-pharmacy rules.</div></div>
+            <div class="boxed"><h4>Chart abstraction</h4><div class="mini-copy">Extract prior failures, disease activity, screening, and contraindications from the note.</div></div>
+            <div class="boxed"><h4>Submission composer</h4><div class="mini-copy">Generate initial PA text, appeals, renewals, and peer-to-peer prep from structured facts.</div></div>
+            <div class="boxed warn"><h4>Denial triage engine</h4><div class="mini-copy">Classify the denial, explain what likely went wrong, and recommend the next move.</div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="block">
+    <section class="section">
       <div class="wrap">
-        <div class="eyebrow">Why RheumAuth</div>
-        <h2>Built for the medication-access problems rheumatology clinics deal with every day</h2>
-        <p class="section-copy">The hardest part is often not writing the letter. It is knowing what the payer wants, what is missing from the chart, and what to do after a denial. RheumAuth is designed to make that process easier to follow and easier to act on.</p>
-        <div class="grid-3">
-          <div class="card"><div class="card-pad"><div class="icon">⏱</div><div class="mini-title" style="margin-top:16px">Too much time wasted</div><div class="mini-copy">Staff lose time chasing requirements, rewriting the same language, and hunting for what a payer wants.</div></div></div>
-          <div class="card"><div class="card-pad"><div class="icon">!</div><div class="mini-title" style="margin-top:16px">Denials are frustrating</div><div class="mini-copy">Many denials come from missing details, unclear documentation, or step edits that were easy to miss.</div></div></div>
-          <div class="card"><div class="card-pad"><div class="icon">☎</div><div class="mini-title" style="margin-top:16px">Peer-to-peer calls need prep</div><div class="mini-copy">Doctors need a fast summary of what failed, why the drug is appropriate, and what to say on the call.</div></div></div>
+        <div class="eyebrow">MVP foundation</div>
+        <h2>The first version focuses on the most painful workflows</h2>
+        <div class="section-copy">Start narrow, solve the clinical and operational pain well, and earn trust before expanding into a full medication-access operating system.</div>
+        <div class="grid-4" style="margin-top:24px">
+          <div class="card pad"><div class="mini-title">New Prior Auth</div><div class="mini-copy">Input patient, insurer, drug, and indication to get a payer-aware submission path.</div></div>
+          <div class="card pad"><div class="mini-title">Denial Analysis</div><div class="mini-copy">Map denial language to the real issue and generate the next best action.</div></div>
+          <div class="card pad"><div class="mini-title">Peer-to-Peer Prep</div><div class="mini-copy">Give physicians concise talking points grounded in the chart and likely payer objection.</div></div>
+          <div class="card pad"><div class="mini-title">Renewals</div><div class="mini-copy">Support continuation requests with benefit language and interruption-risk framing.</div></div>
         </div>
       </div>
     </section>
 
-    <section class="block" id="features" style="background:#edf4fb;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <section class="section" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
       <div class="wrap">
-        <div class="eyebrow">Core features</div>
-        <h2>Simple tools for the tasks that take the most time</h2>
-        <p class="section-copy">Keep the workflow simple, readable, and focused on what staff actually need to do.</p>
-        <div class="grid-4">
-          <div class="card"><div class="card-pad"><div class="icon">📄</div><div class="mini-title" style="margin-top:16px">New prior auths</div><div class="mini-copy">Paste the note and generate a cleaner prior auth draft with missing-information checks.</div></div></div>
-          <div class="card"><div class="card-pad"><div class="icon">🔎</div><div class="mini-title" style="margin-top:16px">Denial review</div><div class="mini-copy">Turn denial language into a simpler explanation of what likely went wrong and what to do next.</div></div></div>
-          <div class="card"><div class="card-pad"><div class="icon">↻</div><div class="mini-title" style="margin-top:16px">Renewals</div><div class="mini-copy">Create continuation summaries that clearly show treatment benefit and the risk of interruption.</div></div></div>
-          <div class="card"><div class="card-pad"><div class="icon">🩺</div><div class="mini-title" style="margin-top:16px">Peer-to-peer prep</div><div class="mini-copy">Give physicians a short summary of the case and the key points to make on the call.</div></div></div>
+        <div class="eyebrow">Interface philosophy</div>
+        <h2>Simple enough for a busy clinic to actually use</h2>
+        <div class="section-copy">Large text, plain labels, clear status colors, and obvious next steps. The design is intentionally calm so older physicians and staff can move quickly without fighting the software.</div>
+        <div class="grid-3" style="margin-top:24px">
+          <div class="card pad"><div class="mini-title">1. Choose the case context</div><div class="mini-copy">Select the payer, plan, drug, diagnosis, and route.</div></div>
+          <div class="card pad"><div class="mini-title">2. Review what was found</div><div class="mini-copy">See green, yellow, and red signals for what is present, weak, or missing.</div></div>
+          <div class="card pad"><div class="mini-title">3. Generate the next move</div><div class="mini-copy">Create the PA, appeal, renewal summary, or peer-to-peer sheet.</div></div>
+        </div>
+        <div style="margin-top:24px"><button class="btn primary" onclick="showPage('product')">Launch Product Demo</button></div>
+      </div>
+    </section>
+  </div>
+
+  <div id="pricing" class="page">
+    <section class="section">
+      <div class="wrap">
+        <div class="eyebrow">Pricing</div>
+        <h2>Simple clinic-friendly pricing</h2>
+        <div class="section-copy">Start with small to medium rheumatology practices, prove ROI with time savings and better approval flow, then expand.</div>
+        <div class="grid-3" style="margin-top:24px">
+          <div class="card pad"><div class="mini-title">Starter</div><div class="mini-copy">For smaller rheumatology practices beginning with medication-access workflows.</div><div style="font-size:30px;font-weight:800;margin:18px 0 12px">Custom</div><div class="mini-copy">• Core auth + denial workflows<br>• Small team access<br>• Demo support</div></div>
+          <div class="card pad" style="background:#eef5fb"><div class="mini-title">Growth</div><div class="mini-copy">For busy clinics handling repeated biologics and renewals each week.</div><div style="font-size:30px;font-weight:800;margin:18px 0 12px">Custom</div><div class="mini-copy">• More users<br>• Renewal + peer-to-peer workflows<br>• Criteria library</div></div>
+          <div class="card pad"><div class="mini-title">Enterprise</div><div class="mini-copy">For larger groups that want rollout support and deeper operational visibility.</div><div style="font-size:30px;font-weight:800;margin:18px 0 12px">Custom</div><div class="mini-copy">• High-volume usage<br>• Priority support<br>• Future analytics layer</div></div>
         </div>
       </div>
     </section>
+  </div>
 
-    <section class="block" id="how">
-      <div class="wrap">
-        <div class="eyebrow">How it works</div>
-        <h2>Easy to learn. Easy to use.</h2>
-        <p class="section-copy">The workflow is designed to be simple, readable, and easy to follow.</p>
-        <div class="grid-3">
-          <div class="card"><div class="card-pad"><div class="step">1</div><div class="mini-title">Choose the case</div><div class="mini-copy">Select the diagnosis, medication, payer, and plan.</div></div></div>
-          <div class="card"><div class="card-pad"><div class="step">2</div><div class="mini-title">Paste the note or denial</div><div class="mini-copy">RheumAuth highlights what was found and what may still be missing.</div></div></div>
-          <div class="card"><div class="card-pad"><div class="step">3</div><div class="mini-title">Generate the next step</div><div class="mini-copy">Create a prior auth draft, appeal, renewal summary, or peer-to-peer prep sheet.</div></div></div>
+  <div id="product" class="page">
+    <section class="product-shell">
+      <div class="wrap product-grid">
+        <div class="sidebar card pad">
+          <div class="title">RheumAuth</div>
+          <div class="muted" style="margin-top:4px">Medication-access operating system</div>
+          <div class="statusline" style="margin:18px 0">Human review before submission</div>
+          <button class="sidebtn active" data-view="dashboard">Dashboard</button>
+          <button class="sidebtn" data-view="new-auth">New Prior Auth</button>
+          <button class="sidebtn" data-view="denial">Denials</button>
+          <button class="sidebtn" data-view="renewal">Renewals</button>
+          <button class="sidebtn" data-view="criteria">Criteria Library</button>
+          <button class="sidebtn" data-view="queue">Workflow Queue</button>
         </div>
-        <div class="btns" style="margin-top:24px"><a class="btn btn-primary" href="#pricing">View Pricing</a></div>
-      </div>
-    </section>
 
-    <section class="block">
-      <div class="wrap trust-grid">
-        <div class="card"><div class="card-pad"><div class="icon">🔒</div><div class="mini-title" style="margin-top:16px">Designed to feel clear, not confusing</div><div class="mini-copy">RheumAuth is built for clinics that do not want complicated software. The interface is simple, readable, and focused on the next task in front of you.</div></div></div>
-        <div class="card"><div class="card-pad"><div class="icon">✓</div><div class="mini-title" style="margin-top:16px">Why teams will trust it</div><div class="mini-copy">Large text, clear buttons, fewer clicks, and easy review before use.</div></div></div>
-      </div>
-    </section>
+        <div class="main">
+          <div id="dashboardView" class="subview">
+            <div class="grid-2">
+              <div class="card pad">
+                <h2>Clinic overview</h2>
+                <div class="mini-copy">Start with the simplest path: new auths, denials, renewals, and criteria review.</div>
+                <div class="metrics" style="margin-top:18px">
+                  <div class="metric"><div class="mini-label">Pending cases</div><div class="value">14</div><div class="mini-copy">4 need review today</div></div>
+                  <div class="metric"><div class="mini-label">Renewals due</div><div class="value">6</div><div class="mini-copy">2 due in 48 hours</div></div>
+                  <div class="metric"><div class="mini-label">Denials needing action</div><div class="value">3</div><div class="mini-copy">1 likely step-therapy</div></div>
+                </div>
+              </div>
+              <div class="card pad" style="background:#eef5fb">
+                <div class="eyebrow">Today’s focus</div>
+                <div style="font-size:28px;font-weight:800;line-height:1.2">Get the fastest realistic path to approval</div>
+                <div class="mini-copy" style="margin-top:10px">Use payer criteria, chart evidence, and denial language together before generating anything.</div>
+                <div style="margin-top:18px"><button class="btn primary" onclick="activateSide('new-auth')">Start New Auth</button></div>
+              </div>
+            </div>
 
-    <section class="block" id="pricing">
-      <div class="wrap">
-        <div class="cta">
-          <div class="cta-row">
-            <div style="max-width:760px"><div class="eyebrow" style="color:#c7d8ee">Request a demo</div><h3>Make prior auth work feel less chaotic.</h3><p>Give your staff a simpler way to prepare prior auths, handle denials, and support renewals in rheumatology.</p></div>
-            <div class="btns"><a class="btn btn-secondary" href="mailto:hello@rheumauth.com?subject=RheumAuth Demo Request">Request a Demo</a><a class="btn" href="#features" style="background:#1d4f8c;color:white">See Product</a></div>
+            <div class="grid-4" style="margin-top:18px">
+              <div class="card pad"><div class="mini-title">New Prior Auth</div><div class="mini-copy">Build a payer-aware auth packet.</div></div>
+              <div class="card pad"><div class="mini-title">Analyze Denial</div><div class="mini-copy">Classify and prepare appeal.</div></div>
+              <div class="card pad"><div class="mini-title">Renewal Summary</div><div class="mini-copy">Support continuation requests.</div></div>
+              <div class="card pad"><div class="mini-title">Criteria Library</div><div class="mini-copy">Review payer playbook.</div></div>
+            </div>
+
+            <div class="card pad" style="margin-top:18px">
+              <div style="font-size:28px;font-weight:800;margin-bottom:10px">Current workflow queue</div>
+              <div class="mini-copy" style="margin-bottom:16px">A future sticky layer: what is pending, who touched it, and what needs action next.</div>
+              <div id="queueList"></div>
+            </div>
           </div>
+
+          <div id="workspaceView" class="subview hidden">
+            <div class="card pad">
+              <div id="workspaceHeader"></div>
+              <div class="workspace" style="margin-top:18px">
+                <div>
+                  <div class="fieldgrid">
+                    <div><label>Payer</label><select id="payer"></select></div>
+                    <div><label>Plan</label><select id="plan"></select></div>
+                  </div>
+                  <div class="fieldgrid" style="margin-top:14px">
+                    <div><label>Diagnosis</label><select id="diagnosis"></select></div>
+                    <div><label>Requested Drug</label><select id="drug"></select></div>
+                  </div>
+                  <div class="fieldgrid" style="margin-top:14px">
+                    <div><label>Route / Benefit Path</label><select id="route"></select></div>
+                    <div><label>Patient / Case</label><input id="patient" value="M. Johnson"></div>
+                  </div>
+                  <div class="playbook" style="margin-top:16px">
+                    <div class="box-title">Payer Playbook Snapshot</div>
+                    <div id="playbookText" class="mini-copy"></div>
+                  </div>
+                  <div style="margin-top:16px">
+                    <label>Clinic note</label>
+                    <textarea id="note">Seropositive rheumatoid arthritis with persistent MCP and wrist synovitis despite adequate methotrexate trial. CRP elevated. TB screening negative. Ongoing active morning stiffness and swelling.</textarea>
+                  </div>
+                  <div id="denialBlock" class="hidden" style="margin-top:16px">
+                    <label>Denial language</label>
+                    <textarea id="denialText">Coverage denied. Criteria not met. Member must try preferred product first and documentation submitted does not clearly establish required prior treatment history.</textarea>
+                  </div>
+                  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px">
+                    <button id="generateBtn" class="btn primary">Generate</button>
+                    <button class="btn secondary" onclick="loadDemoCase()">Load Demo Case</button>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="card pad" style="margin-bottom:16px">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                      <div>
+                        <div style="font-size:28px;font-weight:800">Approval Readiness</div>
+                        <div class="mini-copy">Use the chart plus payer logic before generating final text.</div>
+                      </div>
+                      <div id="readinessTag"></div>
+                    </div>
+                    <div id="signals" style="margin-top:14px"></div>
+                  </div>
+                  <div class="card pad">
+                    <div style="font-size:28px;font-weight:800">Best next path</div>
+                    <div class="mini-copy" style="margin-bottom:12px">The product should guide what to do next, not just generate prose.</div>
+                    <div id="recommendations"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card pad" style="margin-top:18px">
+              <div style="font-size:28px;font-weight:800">Generated outputs</div>
+              <div class="mini-copy">AI-assisted, rules-grounded, human-reviewed outputs based on the selected case context.</div>
+              <div class="tabs" style="margin-top:16px">
+                <button class="tabbtn active" data-tab="pa">PA Summary</button>
+                <button class="tabbtn" data-tab="appeal">Appeal</button>
+                <button class="tabbtn" data-tab="peer">Peer-to-Peer</button>
+                <button class="tabbtn" data-tab="renewalOut">Renewal</button>
+              </div>
+              <div class="tabpanel"><div id="outputText" class="output"></div></div>
+              <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px">
+                <button class="btn primary" onclick="copyOutput()">Copy Output</button>
+                <button class="btn secondary">Edit Output</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="criteriaView" class="subview hidden"></div>
+          <div id="queueView" class="subview hidden"></div>
         </div>
       </div>
     </section>
+  </div>
 
-    <div class="wrap footer">RheumAuth • Built for clearer rheumatology medication-access workflows</div>
-  </main>
+  <div class="wrap footer">RheumAuth • Built for clearer rheumatology medication-access workflows</div>
+
+  <script>
+    const payers = ['Aetna','Cigna','UnitedHealthcare','Blue Cross Blue Shield','Humana'];
+    const plans = ['Commercial PPO','Commercial HMO','Medicare Advantage','Marketplace Plan'];
+    const diagnoses = ['Rheumatoid Arthritis','Psoriatic Arthritis','Ankylosing Spondylitis','nr-axSpA'];
+    const meds = ['Adalimumab','Etanercept','Infliximab','Abatacept','Tocilizumab','Rituximab','Upadacitinib','Secukinumab'];
+    const routes = ['Subcutaneous / Pharmacy Benefit','Intravenous / Medical Benefit','Oral / Pharmacy Benefit'];
+    const queueCases = [
+      { id:'RA-1024', patient:'M. Johnson', drug:'Adalimumab', payer:'Aetna', status:'Needs review', owner:'MA', due:'Today' },
+      { id:'PSA-2201', patient:'L. Carter', drug:'Secukinumab', payer:'Cigna', status:'Denial received', owner:'RN', due:'Today' },
+      { id:'AS-9931', patient:'D. Patel', drug:'Infliximab', payer:'BCBS', status:'Renewal due', owner:'PA Team', due:'2 days' },
+      { id:'RA-7410', patient:'R. Chen', drug:'Upadacitinib', payer:'UHC', status:'Ready to submit', owner:'MA', due:'3 days' },
+    ];
+    const payerPlaybook = {
+      'Aetna': { benefitPath:'Usually pharmacy benefit for self-injectables. IV drugs may route through medical benefit.', commonTraps:['Preferred product step therapy often matters','Missing HBV/TB documentation may weaken first pass approval','Route mismatch can delay processing'], specialtyPharmacy:'May require payer-preferred specialty pharmacy for fulfillment.', siteOfCare:'Infused drugs may face site-of-care review depending on plan.' },
+      'Cigna': { benefitPath:'Varies by drug and route. Confirm specialty pharmacy versus medical benefit early.', commonTraps:['Prior csDMARD failure wording often needs to be explicit','Non-preferred drug requests may need contraindication or failure details','Renewal language should show benefit clearly'], specialtyPharmacy:'Frequently requires designated specialty pharmacy.', siteOfCare:'May steer infusion to payer-preferred locations.' },
+      'UnitedHealthcare': { benefitPath:'Mixed benefit patterns. Pharmacy versus infusion path should be clarified early.', commonTraps:['Preferred product policies may change','Objective disease activity support strengthens approvals','Benefit-pathway mismatch can trigger denials'], specialtyPharmacy:'Common for self-administered specialty meds.', siteOfCare:'Infusion site rules may apply.' },
+      'Blue Cross Blue Shield': { benefitPath:'Plan dependent. Commercial plans may vary substantially.', commonTraps:['Plan-level rules may differ','Missing prior failure details can delay approval','Continuation benefit should be clearly summarized'], specialtyPharmacy:'Depends on plan and PBM structure.', siteOfCare:'May apply for infused biologics.' },
+      'Humana': { benefitPath:'Confirm channel early. Some drugs may route differently based on plan.', commonTraps:['Documentation gaps can lead to generic criteria denials','Preferred alternative requirements may be strict','Renewal packets should document ongoing improvement'], specialtyPharmacy:'Often required for pharmacy-benefit specialty drugs.', siteOfCare:'Can matter for infusions.' }
+    };
+
+    let currentPage = 'home';
+    let currentCaseType = 'new-auth';
+    let currentTab = 'pa';
+
+    function showPage(id){
+      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      currentPage=id;
+      if(id==='product'){ renderProduct(); }
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    function populateSelect(id, items, value){
+      const el=document.getElementById(id); el.innerHTML='';
+      items.forEach(item=>{const o=document.createElement('option');o.value=item;o.textContent=item;if(item===value)o.selected=true;el.appendChild(o);});
+    }
+
+    function queueBadge(label){
+      let cls='badge-status '; 
+      if(label==='Ready to submit') cls+='green';
+      else if(label==='Needs review') cls+='yellow';
+      else if(label==='Renewal due') cls+='';
+      return `<span class="badge-status ${label==='Ready to submit'?'tag green':''}" style="${label==='Needs review'?'background:var(--amberbg);color:var(--amber);border-color:#f1ddb1':''}${label==='Denial received'?'background:var(--rosebg);color:var(--rose);border-color:#f1c6d0':''}${label==='Renewal due'?'background:#eff6ff;color:#2b5fa6;border-color:#cfe0ff':''}${label==='Ready to submit'?'background:var(--greenbg);color:var(--green);border-color:#c7e9d7':''}">${label}</span>`;
+    }
+
+    function renderQueueList(){
+      document.getElementById('queueList').innerHTML = queueCases.map(item=>`
+        <div class="table-row">
+          <div style="font-weight:800">${item.id}</div>
+          <div><div style="font-weight:700">${item.patient} • ${item.drug}</div><div class="muted">${item.payer}</div></div>
+          <div>${queueBadge(item.status)}</div>
+          <div class="muted">${item.owner}</div>
+          <div class="muted">${item.due}</div>
+        </div>`).join('');
+    }
+
+    function activateSide(view){
+      document.querySelectorAll('.sidebtn').forEach(btn=>btn.classList.toggle('active', btn.dataset.view===view));
+      document.querySelectorAll('.subview').forEach(v=>v.classList.add('hidden'));
+      if(view==='dashboard') document.getElementById('dashboardView').classList.remove('hidden');
+      else if(view==='criteria'){ document.getElementById('criteriaView').classList.remove('hidden'); renderCriteria(); }
+      else if(view==='queue'){ document.getElementById('queueView').classList.remove('hidden'); renderQueue(); }
+      else { currentCaseType=view; document.getElementById('workspaceView').classList.remove('hidden'); renderWorkspace(); }
+    }
+
+    function renderProduct(){
+      populateSelect('payer', payers, 'Aetna');
+      populateSelect('plan', plans, 'Commercial PPO');
+      populateSelect('diagnosis', diagnoses, 'Rheumatoid Arthritis');
+      populateSelect('drug', meds, 'Adalimumab');
+      populateSelect('route', routes, 'Subcutaneous / Pharmacy Benefit');
+      ['payer','plan','diagnosis','drug','route','note','denialText','patient'].forEach(id=>{
+        const el=document.getElementById(id);
+        if(el){ el.onchange=renderWorkspace; el.oninput=renderWorkspace; }
+      });
+      document.getElementById('generateBtn').onclick=renderWorkspace;
+      document.querySelectorAll('.sidebtn').forEach(btn=>btn.onclick=()=>activateSide(btn.dataset.view));
+      document.querySelectorAll('.tabbtn').forEach(btn=>btn.onclick=()=>{currentTab=btn.dataset.tab; document.querySelectorAll('.tabbtn').forEach(b=>b.classList.toggle('active', b===btn)); renderOutputs();});
+      renderQueueList();
+      activateSide('dashboard');
+    }
+
+    function getState(){
+      return {
+        payer: document.getElementById('payer').value,
+        plan: document.getElementById('plan').value,
+        diagnosis: document.getElementById('diagnosis').value,
+        drug: document.getElementById('drug').value,
+        route: document.getElementById('route').value,
+        patient: document.getElementById('patient').value,
+        note: document.getElementById('note').value,
+        denialText: document.getElementById('denialText').value
+      };
+    }
+
+    function extractSignals(text, diagnosis){
+      const t = text.toLowerCase();
+      const found=[], weak=[], missing=[];
+      if(t.includes('rheumatoid') || diagnosis==='Rheumatoid Arthritis') found.push('Diagnosis context present');
+      if(t.includes('methotrexate')) found.push('Prior csDMARD use/failure referenced'); else missing.push('Prior csDMARD failure not found');
+      if(t.includes('tb')) found.push('TB screening documented'); else missing.push('TB screening not found');
+      if(t.includes('hbv') || t.includes('hepatitis b')) found.push('HBV screening documented'); else missing.push('HBV screening not found');
+      if(t.includes('synovitis') || t.includes('crp') || t.includes('active')) found.push('Objective or narrative disease activity present'); else weak.push('Disease activity support is weak');
+      if(t.includes('prednisone') || t.includes('steroid')) weak.push('Steroid dependence or steroid burden mentioned');
+      if(t.includes('contraindication') || t.includes('intolerance')) found.push('Intolerance or contraindication language present');
+      if(!t.includes('preferred')) missing.push('Preferred formulary alternative trial not clearly documented');
+      return {found, weak, missing};
+    }
+
+    function readiness(missing, weak){
+      const score = Math.max(0, 100 - missing.length*18 - weak.length*8);
+      if(score>=80) return {label:'Strong', cls:'tag green'};
+      if(score>=55) return {label:'Moderate', cls:'tag yellow'};
+      return {label:'High risk', cls:'tag red'};
+    }
+
+    function denialSummary(text){
+      const t=text.toLowerCase();
+      if(t.includes('preferred product') || t.includes('try preferred')) return {
+        category:'Step therapy / non-preferred drug',
+        issue:'Likely needs clearer preferred product failure, intolerance, or reason requested drug is clinically necessary now.',
+        action:'Consider appeal or resubmission with stronger treatment-history wording. Peer-to-peer may help if prior failures exist but were not framed clearly.'
+      };
+      if(t.includes('documentation')) return {
+        category:'Insufficient documentation',
+        issue:'The insurer likely does not believe the submission clearly met required criteria.',
+        action:'Resubmit or appeal with stronger chart-based evidence and a cleaner criteria checklist.'
+      };
+      return {
+        category:'General criteria denial',
+        issue:'Denial language is broad and likely masks either step-therapy or documentation gaps.',
+        action:'Review payer criteria, strengthen missing data, and prepare appeal language plus peer-to-peer prep.'
+      };
+    }
+
+    function renderSignals(extracted){
+      const block = (title, cls, items, empty)=>`<div class="signal ${cls}"><h4>${title}</h4>${items.length?items.map(i=>`<div>• ${i}</div>`).join(''):`<div>${empty}</div>`}</div>`;
+      document.getElementById('signals').innerHTML =
+        block('Found','green',extracted.found,'No strong findings detected yet.')+
+        block('Needs stronger support','yellow',extracted.weak,'No weak areas flagged.')+
+        block('Missing or not found','red',extracted.missing,'No clearly missing items.');
+    }
+
+    function renderRecommendations(caseType, denial){
+      let html='';
+      if(caseType==='new-auth'){
+        html += `<div class="rec"><b>Best approval path</b>Submit initial PA with clearer step-therapy framing and confirm specialty pharmacy requirement before final routing.</div>`;
+        html += `<div class="rec"><b>Faster covered alternative</b>If preferred product requirements are strict, confirm whether a preferred alternative would reduce approval delay.</div>`;
+        html += `<div class="rec"><b>Need peer-to-peer?</b>Not first move yet. Consider only if stronger chart language still does not clear criteria.</div>`;
+      } else if(caseType==='denial'){
+        html += `<div class="rec"><b>Likely denial type</b>${denial.category}</div>`;
+        html += `<div class="rec"><b>Likely true issue</b>${denial.issue}</div>`;
+        html += `<div class="rec"><b>Recommended next move</b>${denial.action}</div>`;
+      } else {
+        html += `<div class="rec"><b>Best renewal framing</b>Emphasize ongoing benefit, disease control, and the risk of interruption.</div>`;
+        html += `<div class="rec"><b>Helpful additions</b>Functional benefit, fewer flares, and steroid-sparing effect will strengthen the packet.</div>`;
+        html += `<div class="rec"><b>Potential risk</b>If objective improvement is not described clearly, renewal review may stall.</div>`;
+      }
+      document.getElementById('recommendations').innerHTML=html;
+    }
+
+    function outputs(state, extracted, denial){
+      const header = `Patient: ${state.patient}\nDiagnosis: ${state.diagnosis}\nRequested therapy: ${state.drug}\nPayer: ${state.payer} • ${state.plan}\nRoute: ${state.route}\n\n`;
+      return {
+        pa: `${header}Prior Authorization Summary\n\nThe chart supports active disease and the need for advanced therapy. Documented findings include: ${extracted.found.join(', ') || 'limited confirmed findings'}.\n\nItems to strengthen before submission: ${extracted.missing.join(', ') || 'none clearly missing'}.\n\nRecommended positioning:\n- Emphasize active disease burden and prior treatment history.\n- Clarify payer-relevant step therapy details.\n- Confirm benefit pathway and specialty pharmacy requirements before final submission.`,
+        appeal: `${header}Appeal Draft\n\nMost likely denial category: ${denial.category}.\n\nClinical framing:\nThe patient has rheumatologic disease requiring escalation or continuation of therapy. Based on the current record, the denial appears driven more by ${denial.issue.toLowerCase()} than by true lack of clinical need.\n\nRecommended appeal focus:\n- Restate prior treatment history with clearer sequencing.\n- Highlight disease activity and need for requested therapy.\n- Address payer-specific requirements directly.\n\nNext action:\n${denial.action}`,
+        peer: `${header}Peer-to-Peer Prep\n\nLikely payer objection:\n${denial.issue}\n\nTalking points:\n1. The patient has ongoing disease requiring timely advanced therapy.\n2. Prior treatment history supports escalation or continuation.\n3. Delaying approval risks disease worsening or treatment interruption.\n4. Submission language can be clarified, but clinical need is present now.\n5. Requested outcome: approval of ${state.drug}.`,
+        renewalOut: `${header}Renewal Summary\n\nContinuation request for ${state.drug}.\n\nSummary:\nCurrent record supports ongoing treatment benefit and continued medical necessity. Renewal packet should highlight sustained disease control, avoidance of interruption, and risk of flare or worsening symptoms if therapy is delayed.\n\nHelpful additions:\n- Functional benefit\n- Reduced flare frequency\n- Steroid-sparing effect if present`
+      };
+    }
+
+    function renderOutputs(){
+      const state=getState();
+      const text = currentCaseType==='denial' ? state.note+' '+state.denialText : state.note;
+      const extracted=extractSignals(text,state.diagnosis);
+      const denial=denialSummary(state.denialText);
+      const out=outputs(state,extracted,denial);
+      document.getElementById('outputText').textContent = out[currentTab];
+      window._lastOutput = out[currentTab];
+    }
+
+    function renderWorkspace(){
+      const state=getState();
+      const playbook = payerPlaybook[state.payer];
+      document.getElementById('playbookText').innerHTML = `${playbook.benefitPath}<br><br><b style="color:var(--text)">Specialty pharmacy:</b> ${playbook.specialtyPharmacy}<br><b style="color:var(--text)">Site of care:</b> ${playbook.siteOfCare}`;
+      document.getElementById('denialBlock').classList.toggle('hidden', currentCaseType!=='denial');
+      const headers = {
+        'new-auth': {t:'New Prior Auth', s:'Match the chart to payer criteria before generating the submission.', b:'Generate Prior Auth Packet'},
+        'denial': {t:'Denial Analysis', s:'Classify the denial, identify likely true issue, and prepare the next move.', b:'Generate Appeal Strategy'},
+        'renewal': {t:'Renewal Summary', s:'Support continuation requests with a simple, reviewable summary.', b:'Generate Renewal Summary'}
+      }[currentCaseType];
+      document.getElementById('workspaceHeader').innerHTML = `<h2>${headers.t}</h2><div class="mini-copy">${headers.s}</div>`;
+      document.getElementById('generateBtn').textContent=headers.b;
+      const text = currentCaseType==='denial' ? state.note+' '+state.denialText : state.note;
+      const extracted=extractSignals(text,state.diagnosis);
+      const read=readiness(extracted.missing, extracted.weak);
+      document.getElementById('readinessTag').innerHTML=`<span class="${read.cls}">${read.label}</span>`;
+      renderSignals(extracted);
+      const denial=denialSummary(state.denialText);
+      renderRecommendations(currentCaseType,denial);
+      renderOutputs();
+    }
+
+    function renderCriteria(){
+      const state=getState();
+      const playbook=payerPlaybook[state.payer];
+      document.getElementById('criteriaView').innerHTML = `
+        <div class="card pad">
+          <h2>Criteria Library</h2>
+          <div class="mini-copy">This is the start of the moat: payer, drug, diagnosis, and workflow intelligence in one place.</div>
+          <div class="grid-2" style="margin-top:18px">
+            <div class="boxed"><h4>${state.payer} • ${state.drug} • ${state.diagnosis}</h4><div class="mini-copy">• Prior authorization likely required<br>• Prior treatment history should be explicit<br>• Disease activity support strengthens approval<br>• Benefit pathway should be confirmed before submission</div></div>
+            <div class="boxed warn"><h4>Common denial traps</h4><div class="mini-copy">• ${playbook.commonTraps.join('<br>• ')}</div></div>
+            <div class="boxed"><h4>Benefit and pharmacy pathway</h4><div class="mini-copy">• ${playbook.benefitPath}<br>• ${playbook.specialtyPharmacy}<br>• ${playbook.siteOfCare}</div></div>
+            <div class="boxed"><h4>Continuation / renewal reminders</h4><div class="mini-copy">• Show continued benefit<br>• Document flare prevention or stability<br>• Add steroid-sparing effect if present<br>• Explain risk of interruption</div></div>
+          </div>
+        </div>`;
+    }
+
+    function renderQueue(){
+      document.getElementById('queueView').innerHTML = `
+        <div class="card pad">
+          <h2>Workflow Queue</h2>
+          <div class="mini-copy">This becomes sticky when the app helps staff see what is pending, who touched it last, and what needs action next.</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin:16px 0 18px">
+            <button class="btn secondary">Filter</button>
+            <button class="btn secondary">Due Soon</button>
+            <button class="btn secondary">My Cases</button>
+          </div>
+          ${queueCases.map(item=>`<div class="table-row"><div style="font-weight:800">${item.id}</div><div><div style="font-weight:700">${item.patient}</div><div class="muted">${item.drug} • ${item.payer}</div></div><div>${queueBadge(item.status)}</div><div class="muted">${item.owner}</div><div class="muted">${item.due}</div></div>`).join('')}
+        </div>`;
+    }
+
+    function copyOutput(){
+      navigator.clipboard.writeText(window._lastOutput || '').then(()=>alert('Output copied.'));
+    }
+
+    function loadDemoCase(){
+      document.getElementById('patient').value='L. Carter';
+      document.getElementById('payer').value='Cigna';
+      document.getElementById('plan').value='Commercial HMO';
+      document.getElementById('diagnosis').value='Psoriatic Arthritis';
+      document.getElementById('drug').value='Secukinumab';
+      document.getElementById('route').value='Subcutaneous / Pharmacy Benefit';
+      document.getElementById('note').value='Psoriatic arthritis with persistent peripheral joint pain and swelling despite methotrexate trial. Active inflammatory symptoms continue. TB screening negative. Preferred product history not clearly documented.';
+      document.getElementById('denialText').value='Coverage denied. Member must try preferred product first. Documentation submitted does not clearly establish required prior treatment history.';
+      renderWorkspace();
+    }
+
+    renderQueueList();
+  </script>
 </body>
 </html>
